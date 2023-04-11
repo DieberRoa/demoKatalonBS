@@ -3,6 +3,7 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -17,7 +18,21 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Mobile.startApplication('bs://2c21f8d4802ffab69385e0c815313c55b37ec356', true)
+// imports for common stuff
+
+import io.appium.java_client.ios.IOSDriver
+import com.kms.katalon.core.appium.driver.AppiumDriverManager
+import org.openqa.selenium.remote.DesiredCapabilities
+import com.kms.katalon.core.mobile.driver.MobileDriverType
+// ---- Common
+String browserStackServerURL = " https://augustoroamartin_fwKiOd:2QzmTdAcaBTpyFmsQsxn@hub-cloud.browserstack.com/wd/hub";
+DesiredCapabilities capabilities = new DesiredCapabilities();
+capabilities.setCapability("platformName", "ios");
+capabilities.setCapability("platformVersion", "15");
+capabilities.setCapability("device", "iPhone 8");
+capabilities.setCapability("app", "bs://2c21f8d4802ffab69385e0c815313c55b37ec356");
+AppiumDriverManager.createMobileDriver(MobileDriverType.IOS_DRIVER, capabilities, new URL(browserStackServerURL))
+// -- End Common
 
 Mobile.tap(findTestObject('Object Repository/XCUIElementTypeButton - Return'), 0)
 
